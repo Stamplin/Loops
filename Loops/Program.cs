@@ -31,37 +31,80 @@
 
 //Simple Casino Game
 
+using System.Runtime.InteropServices;
+
 Random generator = new Random();
-int diceRoll, Cpoints, Cguess;
-Cpoints = 3;
-diceRoll = generator.Next(2);
+int coinFlip, userPoints, userGuess;
+userPoints = 3;
+coinFlip = generator.Next(2);
 Console.WriteLine("\r\n░███████╗  ░█████╗░░█████╗░██╗███╗░░██╗  ░█████╗░░█████╗░░██████╗██╗███╗░░██╗░█████╗░  ░███████╗\r\n██╔██╔══╝  ██╔══██╗██╔══██╗██║████╗░██║  ██╔══██╗██╔══██╗██╔════╝██║████╗░██║██╔══██╗  ██╔██╔══╝\r\n╚██████╗░  ██║░░╚═╝██║░░██║██║██╔██╗██║  ██║░░╚═╝███████║╚█████╗░██║██╔██╗██║██║░░██║  ╚██████╗░\r\n░╚═██╔██╗  ██║░░██╗██║░░██║██║██║╚████║  ██║░░██╗██╔══██║░╚═══██╗██║██║╚████║██║░░██║  ░╚═██╔██╗\r\n███████╔╝  ╚█████╔╝╚█████╔╝██║██║░╚███║  ╚█████╔╝██║░░██║██████╔╝██║██║░╚███║╚█████╔╝  ███████╔╝\r\n╚══════╝░  ░╚════╝░░╚════╝░╚═╝╚═╝░░╚══╝  ░╚════╝░╚═╝░░╚═╝╚═════╝░╚═╝╚═╝░░╚══╝░╚════╝░  ╚══════╝░");
 Console.WriteLine("================================= \r\n Welcome to the Coin Casino Game!");
 Console.WriteLine("================================= \r\n How to play: You will choose heads or tail, If you guessed correctly, you win a point, \r\n however if you chose incorrectly, you lose a point.");
-Console.WriteLine("================================= \r\n You currently have: " + Cpoints + (" Points"));
+Console.WriteLine("================================= \r\n You currently have: " + userPoints + (" Points"));
 Console.WriteLine("================================= \r\n Would you like to bet on: \r\n 1. Heads \r\n 2. Tails");
-int.TryParse(Console.ReadLine(), out Cguess);
+int.TryParse(Console.ReadLine(), out userGuess);
+
 //make sure input is correct
-while (Cguess >= 1 || Cguess <= 2 )
+while (userGuess < 1 || userGuess > 2 )
 {
     Console.WriteLine("!!ERROR!! Please input \" 1 \" or \" 2 \" ");
     Console.WriteLine("Would you like to bet on: \r\n 1. Heads \r\n 2. Tails");
-    int.TryParse(Console.ReadLine(), out Cguess);
+    int.TryParse(Console.ReadLine(), out userGuess);
 }
 
 
-if (diceRoll == 0 && Cguess == 1) //head
+//tell user what side the coin got
+if (coinFlip == 0) //head flip
 {
-    Console.WriteLine("it is Heads! You're correct!");  
-    Cpoints += 1;
+    Console.WriteLine("                              ░░░░░░░░                            \r\n                      ▒▒░░░░░░░░░░░░░░░░░░▒▒░░                    \r\n                ░░░░░░░░  ░░░░▒▒▒▒░░  ░░    ░░░░░░                \r\n              ░░░░  ░░▒▒░░░░░░▒▒▒▒░░░░░░  ▒▒▒▒░░░░░░░░            \r\n            ░░░░  ░░▒▒░░░░░░  ░░▒▒░░▒▒░░░░▒▒░░░░░░  ░░░░          \r\n          ░░░░  ░░▒▒░░  ░░░░░░░░░░░░░░░░░░    ▒▒░░░░  ░░░░        \r\n        ░░░░  ▒▒    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░  ░░░░      \r\n      ░░░░  ▒▒░░  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  ░░░░░░  ░░░░    \r\n    ░░░░  ░░▒▒  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░      ░░░░    ░░    \r\n    ░░  ░░░░    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░        ▒▒  ░░░░  \r\n  ░░░░  ░░      ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░        ░░░░  ░░  \r\n  ░░  ░░░░░░  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░        ░░  ░░░░░░\r\n  ░░    ░░    ░░░░▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒          ░░░░  ░░\r\n  ░░  ▒▒░░      ▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░          ░░    ░░\r\n░░  ░░▒▒        ▒▒░░░░░░░░░░░░░░░░░░░░░░░░  ░░░░░░        ░░░░  ░░\r\n░░░░░░░░        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░  ░░░░░░      ░░▒▒  ░░\r\n░░░░░░░░        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒        ░░░░░░\r\n░░  ░░░░        ░░░░▒▒░░░░░░░░▒▒░░░░░░░░░░░░░░░░░░          ░░░░░░\r\n░░░░▒▒░░        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░░░              ░░\r\n░░░░  ░░          ▒▒░░▒▒░░▒▒░░░░░░░░░░░░░░░░░░░░░░        ░░░░  ░░\r\n░░░░  ░░            ░░░░▒▒░░░░░░░░░░░░░░░░▒▒░░░░          ░░░░  ░░\r\n  ░░  ░░░░              ░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒░░          ░░░░  ░░\r\n  ░░  ░░░░        ░░░░░░░░░░░░░░░░░░░░░░░░                ░░░░░░  \r\n  ░░░░  ░░░░    ░░░░░░░░░░░░░░░░░░░░░░▒▒                ░░░░  ░░  \r\n    ░░  ░░░░░░░░░░░░░░▒▒░░░░░░░░░░░░░░░░                ░░░░░░░░  \r\n    ░░░░░░  ░░░░░░░░░░░░░░░░░░░░░░░░░░                ▒▒░░  ░░    \r\n      ░░░░  ░░░░░░░░░░░░░░░░▒▒░░░░░░░░░░░░          ░░░░░░░░      \r\n      ░░░░  ░░▓▓░░░░░░░░░░░░░░▒▒░░▒▒▒▒░░░░░░      ░░░░░░░░░░      \r\n        ░░░░  ░░██░░░░░░░░░░░░░░▒▒▒▒░░░░░░░░░░░░░░░░░░░░          \r\n          ░░░░░░░░▓▓░░░░░░▒▒░░░░▒▒░░░░▒▒░░░░░░░░    ░░░░          \r\n            ░░░░░░  ▓▓▓▓▒▒░░░░░░░░▒▒▒▒░░░░░░░░▒▒░░░░              \r\n                ░░░░░░  ▒▒▓▓▓▓▒▒▒▒▒▒░░▒▒░░▒▒░░░░░░                \r\n                    ░░░░░░░░          ░░░░░░░░                    \r\n                          ░░░░░░░░░░░░░░                          ");
+    Console.WriteLine("\r\n██╗░░██╗███████╗░█████╗░██████╗░░██████╗\r\n██║░░██║██╔════╝██╔══██╗██╔══██╗██╔════╝\r\n███████║█████╗░░███████║██║░░██║╚█████╗░\r\n██╔══██║██╔══╝░░██╔══██║██║░░██║░╚═══██╗\r\n██║░░██║███████╗██║░░██║██████╔╝██████╔╝\r\n╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝╚═════╝░╚═════╝░");
 }
-
-
-if (diceRoll == 1) //tail
+else if (coinFlip == 1) //tail flip
 {
-    Console.WriteLine("Tails");
-    Cpoints += 1;
+    Console.WriteLine("                            ░░░░░░░░░░                              \r\n                      ░░░░░░░░  ░░░░░░░░░░░░░░                      \r\n                  ░░░░░░  ░░▒▒▒▒░░▒▒░░░░    ░░░░░░                  \r\n              ░░░░░░░░░░▒▒  ▒▒▒▒▒▒▒▒░░▒▒▒▒░░░░  ░░░░░░              \r\n            ░░░░  ░░░░▒▒░░        ░░░░    ░░▒▒░░░░  ░░░░            \r\n          ░░░░░░░░▒▒              ▒▒▒▒░░      ░░░░░░  ░░░░          \r\n        ░░░░░░▒▒▒▒              ░░░░░░            ░░░░  ░░░░        \r\n      ░░░░  ░░▒▒              ▒▒▒▒▒▒░░                ▒▒  ░░░░      \r\n    ░░░░    ▒▒                ░░▒▒▒▒░░                ░░░░  ░░      \r\n    ░░  ▒▒░░                    ▒▒▒▒                    ░░░░░░░░    \r\n    ░░  ░░▒▒      ▒▒▒▒░░    ▒▒▓▓▒▒▒▒▓▓░░    ▒▒▒▒        ░░░░  ░░    \r\n  ░░░░░░▒▒      ░░▒▒▒▒░░    ▒▒░░▒▒▒▒░░▒▒    ▒▒▒▒▒▒        ░░  ░░░░  \r\n  ░░  ░░░░      ▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒▒░░    ▒▒▒▒▒▒░░      ▒▒░░  ░░  \r\n  ░░  ▒▒░░    ▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒      ░░▒▒  ░░  \r\n░░░░░░░░      ▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒      ░░  ░░  \r\n░░░░  ░░    ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░    ░░  ░░░░\r\n░░░░░░▒▒    ▒▒░░▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░    ░░░░░░░░\r\n░░░░░░░░    ▒▒▒▒░░░░▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░    ▒▒░░░░░░\r\n░░░░░░░░    ▒▒░░▒▒▒▒▒▒  ░░░░▒▒░░▒▒▒▒░░░░░░▒▒▒▒▒▒░░▒▒▒▒      ░░░░░░░░\r\n░░░░░░░░    ▒▒░░░░▒▒▒▒    ▒▒░░▒▒▒▒▒▒░░░░░░░░░░▒▒░░░░▒▒░░    ░░░░░░░░\r\n░░░░  ░░    ▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒░░░░▒▒▒▒░░░░░░░░░░▒▒░░▒▒░░░░    ░░  ░░  \r\n  ░░  ▒▒░░  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░▒▒░░▒▒░░░░▒▒▒▒░░  ░░    ░░  \r\n  ░░░░▒▒░░  ▒▒▒▒░░  ░░▒▒░░░░░░░░░░▒▒░░░░▒▒░░░░░░░░░░▒▒    ▒▒░░░░    \r\n  ░░░░  ▒▒░░░░░░░░▒▒▒▒  ░░▒▒  ░░▒▒▒▒░░  ░░░░  ▒▒░░▒▒▒▒  ░░    ░░    \r\n    ░░  ▒▒░░  ░░░░░░▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░    ░░░░░░    \r\n    ░░░░  ░░░░        ░░░░▒▒▒▒░░░░▒▒▒▒▒▒▒▒░░  ░░      ░░▒▒  ░░      \r\n      ░░░░░░░░░░          ░░░░▒▒▒▒▒▒▒▒              ░░░░  ░░░░      \r\n        ░░░░▒▒░░                                  ░░░░░░░░░░        \r\n        ░░░░░░░░░░░░                          ░░░░░░░░░░░░          \r\n          ░░░░░░░░░░░░░░      ░░  ░░      ░░░░░░▒▒  ░░░░            \r\n              ░░░░  ░░░░░░▒▒  ░░░░  ░░  ░░▒▒░░░░  ░░░░              \r\n                ░░░░░░  ░░░░  ░░░░░░░░░░░░    ░░░░                  \r\n                    ░░░░░░░░░░        ░░░░░░░░                      \r\n                          ░░░░░░░░░░░░░░░░                          ");
+    Console.WriteLine("\r\n████████╗░█████╗░██╗██╗░░░░░░██████╗\r\n╚══██╔══╝██╔══██╗██║██║░░░░░██╔════╝\r\n░░░██║░░░███████║██║██║░░░░░╚█████╗░\r\n░░░██║░░░██╔══██║██║██║░░░░░░╚═══██╗\r\n░░░██║░░░██║░░██║██║███████╗██████╔╝\r\n░░░╚═╝░░░╚═╝░░╚═╝╚═╝╚══════╝╚═════╝░");
 }
 
+//Checking if correct or wrong
+if (coinFlip == 0 && userGuess == 1) //correct head
+{
+    Console.WriteLine("You're correct!");
+    userPoints += 1;
+    Console.WriteLine("You now currently have " + userPoints + " Points.");
+}
+else if (coinFlip == 0 && userGuess == 2) // wrong tail
+{
+    Console.WriteLine("Incorrect! D:");
+    userPoints -= 1;
+    Console.WriteLine("You now currently have " + userPoints + " Points.");
+}
+if (coinFlip == 1 && userGuess == 2) //correct tail
+{
+    Console.WriteLine("You're correct!");
+    userPoints += 1;
+    Console.WriteLine("You now currently have " + userPoints + " Points.");
+}
+else if (coinFlip == 1 && userGuess == 1) // wrong head
+{
+    Console.WriteLine("Incorrect! D:");
+    userPoints -= 1;
+    Console.WriteLine("You now currently have " + userPoints + " Points.");
+}
+
+Console.WriteLine("Press Enter to play again!");
+Console.ReadLine();
+Console.Clear();
+
+Console.WriteLine ("You currently have: " + userPoints + (" Points"));
+Console.WriteLine("================================= \r\n Would you like to bet on: \r\n 1. Heads \r\n 2. Tails");
+int.TryParse(Console.ReadLine(), out userGuess);
+
+//make sure input is correct
+while (userGuess < 1 || userGuess > 2)
+{
+    Console.WriteLine("!!ERROR!! Please input \" 1 \" or \" 2 \" ");
+    Console.WriteLine("Would you like to bet on: \r\n 1. Heads \r\n 2. Tails");
+    int.TryParse(Console.ReadLine(), out userGuess);
+}
 
 Console.ReadLine();
